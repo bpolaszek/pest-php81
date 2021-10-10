@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  tests:
+  pest:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -25,5 +25,29 @@ jobs:
         run: composer install --prefer-dist --no-progress --ignore-platform-req=php
 
       - name: Run tests
-        run: vendor/bin/pest
+        run: vendor/bin/pest tests/Pest/ItWorksTest.php
+
+
+  phpunit:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        php-version:
+          - 8.0
+          - 8.1
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --ignore-platform-req=php
+
+      - name: Run tests
+        run: vendor/bin/phpunit tests/PhpUnit/ItWorksTest.php
+
+
 

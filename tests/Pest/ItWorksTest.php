@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test;
+namespace App\Test\Pest;
 
 use App\SomeService;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\ChainTokenExtractor;
